@@ -1,0 +1,8 @@
+const menu=document.querySelector('#menu'), links=document.querySelector('#links'), theme=document.querySelector('#theme');
+menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));menu.textContent=open?'×':'☰';});
+links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.textContent='☰';}));
+theme.addEventListener('click',()=>{document.body.classList.toggle('dark');theme.textContent=document.body.classList.contains('dark')?'☀':'☾';});
+document.querySelectorAll('[data-filter]').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('[data-filter]').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.project').forEach(card=>card.hidden=btn.dataset.filter!=='all'&&card.dataset.filter!==btn.dataset.filter);}));
+document.querySelectorAll('.details').forEach(btn=>btn.addEventListener('click',()=>{const p=btn.nextElementSibling,open=btn.getAttribute('aria-expanded')==='true';btn.setAttribute('aria-expanded',String(!open));p.hidden=open;btn.textContent=open?'View learning goals ＋':'Hide learning goals −';}));
+document.querySelector('#copy').addEventListener('click',async()=>{const status=document.querySelector('#status');try{await navigator.clipboard.writeText('25bcs218@kgcas.com');status.textContent='Email address copied!';}catch{status.textContent='Copy manually: 25bcs218@kgcas.com';}});
+document.querySelector('#year').textContent=new Date().getFullYear();
